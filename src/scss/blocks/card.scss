@@ -1,0 +1,45 @@
+@use '../mixins/pseudo.scss' as *;
+
+.card{
+    padding: 2rem;
+    border-radius: 1rem;
+    color: black;
+    background-color: lightpink;
+
+    &--profile{
+        position: relative;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        
+        &::before{
+            @include pseudo(100%,50%){
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 60%;
+                background-color: aliceblue;
+            }
+           
+        }
+    }
+
+    &__image{
+        max-width: 60%;
+    }
+    &__name{
+        font-size: 3rem;
+        font-weight: 200;
+    }
+    &__list{
+        &-item{
+            margin-bottom: 1rem;
+            cursor: pointer;
+            &--selected{
+                color: aliceblue;
+            }
+        }
+    }
+    &__current{
+        font-size: 3rem;
+    }
+}

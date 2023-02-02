@@ -1,37 +1,91 @@
 @use '../mixins/pseudo.scss' as *;
 
 .card{
+    position: relative;
     padding: 2rem;
     border-radius: 1rem;
     color: black;
     background-color: lightpink;
 
+    &--work::before,
+    &--play::before,
+    &--study::before,
+    &--exercise::before,
+    &--social::before,
+    &--self-care::before {
+      background-repeat: no-repeat;
+      background-position: right -0px;
+    }
+  
+    &--work::before {
+      background-color: var(--work);
+      background-image: url(../assets/images/icon-work.svg);
+    }
+    &--play::before {
+      background-color: var(--play);
+      background-image: url(../assets/images/icon-play.svg);
+    }
+    &--study::before {
+      background-color: var(--study);
+      background-image: url(../assets/images/icon-study.svg);
+    }
+    &--exercise::before {
+      background-color: var(--exercise);
+      background-image: url(../assets/images/icon-exercise.svg);
+    }
+    &--social::before {
+      background-color: var(--social);
+      background-image: url(../assets/images/icon-social.svg);
+    }
+    &--self-care::before {
+      background-color: var(--self-care);
+      background-image: url(../assets/images/icon-self-care.svg);
+    }
+    &:not(.card--profile)::before {
+        @include pseudo(100%, 100px);
+        top: -85px;
+        left: 0;
+        z-index: -1;
+        border-radius: 1rem 1rem 0 0;
+      }
+
     &--profile{
         position: relative;
+        transform: translateZ(0);
+        overflow: hidden;
         grid-row-start: 1;
         grid-row-end: 3;
         
-        &::before{
-            @include pseudo(100%,50%){
+        &::after{
+            @include pseudo(100%,65%){
                 position: absolute;
-                top: 0;
+                top: 0px;
                 left: 0;
-                height: 60%;
+                border-radius: 1rem;
                 background-color: aliceblue;
+                z-index: -1;
             }
            
         }
     }
+    &:not(.card--profile) {
+        align-self: end;
+        cursor: pointer;
+      }
 
     &__image{
         max-width: 60%;
+        border: 5px solid lightpink ;
+        border-radius: 50%
     }
     &__name{
         font-size: 3rem;
         font-weight: 200;
     }
     &__list{
+        padding-top: 2rem;
         &-item{
+            width: fit-content;
             margin-bottom: 1rem;
             cursor: pointer;
             &--selected{
@@ -42,4 +96,6 @@
     &__current{
         font-size: 3rem;
     }
+
+   
 }
